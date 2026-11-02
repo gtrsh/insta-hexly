@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    document.documentElement.dataset.bsTheme =
+      window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  </script>
+  <title>{{#if title}}{{title}} · {{/if}}{{siteName}}</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-md bg-body border-bottom sticky-top">
+    <div class="container app-container">
+      <a class="navbar-brand brand" href="{{#if currentUser}}/feed{{else}}/{{/if}}">
+        <i class="bi bi-hexagon-fill"></i> {{siteName}}
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Меню">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-md-center gap-md-1">
+          <li class="nav-item">
+            <a class="nav-link" href="/feed"><i class="bi bi-grid-3x3-gap"></i> Лента</a>
+          </li>
+          {{#if currentUser}}
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/new"><i class="bi bi-plus-square"></i> Новый пост</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                {{> avatar user=currentUser size="sm"}}
+                <span>{{currentUser.username}}</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/u/{{currentUser.username}}"><i class="bi bi-person"></i> Профиль</a></li>
+                <li><a class="dropdown-item" href="/settings"><i class="bi bi-gear"></i> Настройки</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <form method="post" action="/logout">
+                    <button class="dropdown-item" type="submit"><i class="bi bi-box-arrow-right"></i> Выйти</button>
+                  </form>
+                </li>
+              </ul>
+            </li>
+          {{else}}
+            <li class="nav-item"><a class="nav-link" href="/login">Войти</a></li>
+            <li class="nav-item"><a class="btn btn-primary btn-sm ms-md-2" href="/register">Регистрация</a></li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow-1 py-4">
+    <div class="container app-container">
+      {{#if flash}}
+        <div class="alert alert-{{flash.type}} alert-dismissible fade show" role="alert">
+          {{flash.message}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+        </div>
+      {{/if}}
+      {{{body}}}
+    </div>
+  </main>
+
+  <footer class="border-top py-3 text-body-secondary small">
+    <div class="container app-container d-flex justify-content-between">
+      <span>© {{year}} {{siteName}}</span>
+      <span>Фотографии, подписки и ничего лишнего</span>
+    </div>
+  </footer>
+
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

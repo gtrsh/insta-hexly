@@ -1,11 +1,28 @@
 {
   "name": "insta-hexly",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Photo sharing service: posts, feed, follows",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production node --env-file-if-exists=.env src/server.js",
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "test": "node --test"
   },
   "keywords": [],
-  "type": "commonjs"
+  "dependencies": {
+    "@fastify/cookie": "^11.1.5",
+    "@fastify/formbody": "^9.0.1",
+    "@fastify/multipart": "^10.1.8",
+    "@fastify/static": "^10.1.10",
+    "@fastify/view": "^12.0.1",
+    "bootstrap": "^5.3.9",
+    "bootstrap-icons": "^1.13.2",
+    "fastify": "^5.12.8",
+    "handlebars": "^4.7.10"
+  }
 }
