@@ -1,0 +1,46 @@
+<div class="auth-card card mx-auto">
+  <div class="card-body p-4 p-md-5">
+    <h1 class="h3 fw-bold text-center mb-1">Регистрация</h1>
+    <p class="text-center text-body-secondary mb-4">Создайте аккаунт, чтобы публиковать фотографии и подписываться на авторов.</p>
+
+    <form method="post" action="/register" novalidate>
+      <div class="mb-3">
+        <label for="username" class="form-label">Имя пользователя</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control {{#if errors.username}}is-invalid{{/if}}" id="username" name="username"
+                 value="{{values.username}}" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_.]+"
+                 autocomplete="username" autocapitalize="none" spellcheck="false" autofocus>
+          {{#if errors.username}}<div class="invalid-feedback">{{errors.username}}</div>{{/if}}
+        </div>
+        <div class="form-text">3-30 символов: латинские буквы, цифры, «_» и «.».</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Электронная почта</label>
+        <input type="email" class="form-control {{#if errors.email}}is-invalid{{/if}}" id="email" name="email"
+               value="{{values.email}}" required maxlength="254" autocomplete="email">
+        {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input type="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" id="password" name="password"
+               required minlength="8" maxlength="128" autocomplete="new-password">
+        {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+        <div class="form-text">Не меньше 8 символов.</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="passwordConfirm" class="form-label">Повторите пароль</label>
+        <input type="password" class="form-control {{#if errors.passwordConfirm}}is-invalid{{/if}}" id="passwordConfirm"
+               name="passwordConfirm" required autocomplete="new-password">
+        {{#if errors.passwordConfirm}}<div class="invalid-feedback">{{errors.passwordConfirm}}</div>{{/if}}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 py-2">Зарегистрироваться</button>
+    </form>
+
+    <p class="text-center mt-4 mb-0">Уже есть аккаунт? <a href="/login">Войти</a></p>
+  </div>
+</div>

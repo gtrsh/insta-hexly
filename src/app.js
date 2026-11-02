@@ -14,9 +14,11 @@ import { loadConfig } from './config.js';
 import { openDatabase } from './db.js';
 import { createStore } from './store.js';
 import { registerHelpers } from './lib/view-helpers.js';
+import { setupSession } from './plugins/session.js';
 import { createStorage } from './storage/index.js';
 
 import homeRoutes from './routes/home.js';
+import authRoutes from './routes/auth.js';
 
 const srcDir = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(srcDir, '..');
@@ -85,7 +87,10 @@ export async function buildApp(overrides = {}, deps = {}) {
     defaultContext: { siteName: 'Hexlygram', year: new Date().getFullYear() },
   });
 
+  setupSession(app);
+
   await app.register(homeRoutes);
+  await app.register(authRoutes);
 
   app.get('/favicon.ico', (request, reply) => reply.redirect('/static/favicon.svg', 301));
 
