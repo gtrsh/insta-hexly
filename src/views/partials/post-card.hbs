@@ -1,0 +1,22 @@
+<article class="card post-card mb-4">
+  <header class="card-header bg-body d-flex align-items-center gap-2 py-2">
+    <a href="/u/{{authorUsername}}" class="d-flex align-items-center gap-2 text-reset text-decoration-none fw-semibold">
+      {{> avatar user=(author authorUsername authorAvatar) size="md"}}
+      {{authorUsername}}
+    </a>
+    <div class="ms-auto">
+      {{> followButton username=authorUsername isFollowing=isFollowing isOwn=isOwn back=back loggedIn=loggedIn}}
+    </div>
+  </header>
+  <a href="/p/{{id}}" class="post-image-link">
+    <img src="{{mediaUrl image}}" class="post-image" alt="Публикация {{authorUsername}}" loading="lazy">
+  </a>
+  <div class="card-body">
+    {{#if caption}}
+      <p class="card-text caption mb-2"><a href="/u/{{authorUsername}}" class="fw-semibold text-reset text-decoration-none">{{authorUsername}}</a> {{caption}}</p>
+    {{/if}}
+    <a href="/p/{{id}}" class="small text-body-secondary text-decoration-none">
+      <time datetime="{{isoDate createdAt}}">{{formatDate createdAt}}</time>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,24 @@
+<div class="feed mx-auto">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h1 class="h4 fw-bold mb-0">Лента</h1>
+    {{#if currentUser}}
+      <a href="/posts/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Новый пост</a>
+    {{/if}}
+  </div>
+
+  {{#each posts}}
+    {{> postCard back=@root.back loggedIn=@root.currentUser}}
+  {{else}}
+    <div class="empty-state text-center py-5">
+      <i class="bi bi-images"></i>
+      <p class="mt-3 mb-1 fw-semibold">Здесь пока пусто</p>
+      {{#if currentUser}}
+        <p class="text-body-secondary">Станьте первым - <a href="/posts/new">опубликуйте фотографию</a>.</p>
+      {{else}}
+        <p class="text-body-secondary"><a href="/register">Зарегистрируйтесь</a>, чтобы опубликовать первую фотографию.</p>
+      {{/if}}
+    </div>
+  {{/each}}
+
+  {{> pagination pagination=pagination}}
+</div>
