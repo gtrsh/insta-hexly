@@ -1,0 +1,31 @@
+<div class="card form-card mx-auto">
+  <div class="card-body p-4 p-md-5">
+    <h1 class="h4 fw-bold mb-4">Новая публикация</h1>
+
+    {{#if error}}<div class="alert alert-danger" role="alert">{{error}}</div>{{/if}}
+
+    <form method="post" action="/posts" enctype="multipart/form-data">
+      <div class="mb-4">
+        <label for="image" class="form-label">Фотография</label>
+        <div class="upload-preview mb-2 d-none" data-preview-for="image">
+          <img alt="Предпросмотр">
+        </div>
+        <input class="form-control" type="file" id="image" name="image" required
+               accept="image/jpeg,image/png,image/gif,image/webp" data-max-mb="{{maxUploadMb}}">
+        <div class="form-text">JPEG, PNG, GIF или WebP, до {{maxUploadMb}} МБ.</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="caption" class="form-label">Описание</label>
+        <textarea class="form-control" id="caption" name="caption" rows="5" maxlength="{{captionMax}}"
+                  placeholder="Расскажите о снимке…" data-counter="captionCounter">{{caption}}</textarea>
+        <div class="form-text text-end"><span id="captionCounter">0</span> / {{captionMax}}</div>
+      </div>
+
+      <div class="d-flex gap-2 justify-content-end">
+        <a href="/feed" class="btn btn-outline-secondary">Отмена</a>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Опубликовать</button>
+      </div>
+    </form>
+  </div>
+</div>

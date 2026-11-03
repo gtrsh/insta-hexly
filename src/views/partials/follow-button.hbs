@@ -1,0 +1,23 @@
+{{#unless isOwn}}
+  {{#if loggedIn}}
+    {{#if isFollowing}}
+      <form method="post" action="/u/{{username}}/unfollow" class="d-inline">
+        <input type="hidden" name="back" value="{{back}}">
+        <button type="submit" class="btn btn-outline-secondary {{#unless large}}btn-sm{{/unless}}">
+          <i class="bi bi-person-check"></i> Вы подписаны
+        </button>
+      </form>
+    {{else}}
+      <form method="post" action="/u/{{username}}/follow" class="d-inline">
+        <input type="hidden" name="back" value="{{back}}">
+        <button type="submit" class="btn btn-primary {{#unless large}}btn-sm{{/unless}}">
+          <i class="bi bi-person-plus"></i> Подписаться
+        </button>
+      </form>
+    {{/if}}
+  {{else}}
+    <a class="btn btn-primary {{#unless large}}btn-sm{{/unless}}" href="/login?next={{urlencode back}}">
+      <i class="bi bi-person-plus"></i> Подписаться
+    </a>
+  {{/if}}
+{{/unless}}

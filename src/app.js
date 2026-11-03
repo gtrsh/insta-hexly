@@ -19,6 +19,7 @@ import { createStorage } from './storage/index.js';
 
 import homeRoutes from './routes/home.js';
 import authRoutes from './routes/auth.js';
+import postRoutes from './routes/posts.js';
 
 const srcDir = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(srcDir, '..');
@@ -27,6 +28,7 @@ const packageDir = (name) => dirname(require.resolve(`${name}/package.json`));
 
 const PARTIALS = {
   avatar: 'partials/avatar.hbs',
+  followButton: 'partials/follow-button.hbs',
 };
 
 export async function buildApp(overrides = {}, deps = {}) {
@@ -91,6 +93,7 @@ export async function buildApp(overrides = {}, deps = {}) {
 
   await app.register(homeRoutes);
   await app.register(authRoutes);
+  await app.register(postRoutes);
 
   app.get('/favicon.ico', (request, reply) => reply.redirect('/static/favicon.svg', 301));
 

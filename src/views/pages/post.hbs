@@ -1,0 +1,33 @@
+<article class="card post-detail overflow-hidden mx-auto">
+  <div class="row g-0">
+    <div class="col-lg-7 post-detail-media d-flex align-items-center justify-content-center">
+      <img src="{{mediaUrl post.image}}" class="img-fluid" alt="Публикация {{post.authorUsername}}">
+    </div>
+    <div class="col-lg-5 d-flex flex-column">
+      <header class="d-flex align-items-center gap-2 p-3 border-bottom">
+        <a href="/u/{{post.authorUsername}}" class="d-flex align-items-center gap-2 text-reset text-decoration-none fw-semibold">
+          {{> avatar user=(author post.authorUsername post.authorAvatar) size="md"}}
+          {{post.authorUsername}}
+        </a>
+        <div class="ms-auto">
+          {{> followButton username=post.authorUsername isFollowing=post.isFollowing isOwn=post.isOwn back=back loggedIn=currentUser}}
+        </div>
+      </header>
+      <div class="p-3 flex-grow-1">
+        {{#if post.caption}}
+          <p class="caption mb-0">{{post.caption}}</p>
+        {{else}}
+          <p class="text-body-secondary fst-italic mb-0">Без описания</p>
+        {{/if}}
+      </div>
+      <footer class="d-flex align-items-center justify-content-between p-3 border-top">
+        <time class="small text-body-secondary" datetime="{{isoDate post.createdAt}}">{{formatDate post.createdAt}}</time>
+        {{#if post.isOwn}}
+          <form method="post" action="/p/{{post.id}}/delete" data-confirm="Удалить публикацию? Это действие нельзя отменить.">
+            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Удалить</button>
+          </form>
+        {{/if}}
+      </footer>
+    </div>
+  </div>
+</article>
