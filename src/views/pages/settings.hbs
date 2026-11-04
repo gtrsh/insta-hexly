@@ -1,0 +1,35 @@
+<div class="card form-card mx-auto">
+  <div class="card-body p-4 p-md-5">
+    <h1 class="h4 fw-bold mb-4">Настройки профиля</h1>
+
+    {{#if error}}<div class="alert alert-danger" role="alert">{{error}}</div>{{/if}}
+
+    <div class="d-flex flex-column flex-sm-row align-items-center gap-4 mb-4">
+      {{> avatar user=profile size="xl"}}
+      <div>
+        <div class="fw-semibold fs-5">{{profile.username}}</div>
+        <div class="text-body-secondary">{{profile.email}}</div>
+        <a href="/u/{{profile.username}}" class="small">Открыть профиль</a>
+      </div>
+    </div>
+
+    <h2 class="h6 fw-semibold">Аватар</h2>
+    <form method="post" action="/settings/avatar" enctype="multipart/form-data" class="mb-3">
+      <div class="upload-preview upload-preview-round mb-2 d-none" data-preview-for="avatar">
+        <img alt="Предпросмотр">
+      </div>
+      <div class="input-group">
+        <input class="form-control" type="file" id="avatar" name="avatar" required
+               accept="image/jpeg,image/png,image/gif,image/webp" data-max-mb="{{maxUploadMb}}">
+        <button type="submit" class="btn btn-primary">Загрузить</button>
+      </div>
+      <div class="form-text">JPEG, PNG, GIF или WebP, до {{maxUploadMb}} МБ. Лучше всего подойдёт квадратное изображение.</div>
+    </form>
+
+    {{#if profile.avatar}}
+      <form method="post" action="/settings/avatar/delete" data-confirm="Удалить аватар?">
+        <button type="submit" class="btn btn-link link-danger p-0">Удалить аватар</button>
+      </form>
+    {{/if}}
+  </div>
+</div>

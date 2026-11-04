@@ -22,6 +22,7 @@ import authRoutes from './routes/auth.js';
 import feedRoutes from './routes/feed.js';
 import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
+import settingsRoutes from './routes/settings.js';
 
 const srcDir = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(srcDir, '..');
@@ -101,6 +102,7 @@ export async function buildApp(overrides = {}, deps = {}) {
   await app.register(feedRoutes);
   await app.register(userRoutes);
   await app.register(postRoutes);
+  await app.register(settingsRoutes);
 
   app.get('/favicon.ico', (request, reply) => reply.redirect('/static/favicon.svg', 301));
 
