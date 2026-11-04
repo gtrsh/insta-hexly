@@ -20,6 +20,7 @@ import { createStorage } from './storage/index.js';
 import homeRoutes from './routes/home.js';
 import authRoutes from './routes/auth.js';
 import feedRoutes from './routes/feed.js';
+import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
 
 const srcDir = dirname(fileURLToPath(import.meta.url));
@@ -32,6 +33,7 @@ const PARTIALS = {
   pagination: 'partials/pagination.hbs',
   postCard: 'partials/post-card.hbs',
   followButton: 'partials/follow-button.hbs',
+  photoGrid: 'partials/photo-grid.hbs',
 };
 
 export async function buildApp(overrides = {}, deps = {}) {
@@ -97,6 +99,7 @@ export async function buildApp(overrides = {}, deps = {}) {
   await app.register(homeRoutes);
   await app.register(authRoutes);
   await app.register(feedRoutes);
+  await app.register(userRoutes);
   await app.register(postRoutes);
 
   app.get('/favicon.ico', (request, reply) => reply.redirect('/static/favicon.svg', 301));

@@ -1,0 +1,7 @@
+<div class="photo-grid">
+  {{#each posts}}
+    <a href="/p/{{id}}" class="photo-tile" title="{{caption}}">
+      <img src="{{mediaUrl image}}" alt="{{#if caption}}{{caption}}{{else}}Фотография{{/if}}" loading="lazy">
+    </a>
+  {{/each}}
+</div>

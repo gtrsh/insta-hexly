@@ -1,0 +1,33 @@
+<section class="profile-header d-flex flex-column flex-sm-row align-items-center gap-4 mb-4 pb-4 border-bottom">
+  {{> avatar user=profile size="xl"}}
+  <div class="flex-grow-1 text-center text-sm-start">
+    <div class="d-flex flex-column flex-sm-row align-items-center gap-3 mb-3">
+      <h1 class="h3 mb-0 fw-semibold">{{profile.username}}</h1>
+      {{#if isOwn}}
+        <div class="d-flex gap-2">
+          <a href="/settings" class="btn btn-outline-secondary btn-sm"><i class="bi bi-gear"></i> Настройки</a>
+          <a href="/posts/new" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Новый пост</a>
+        </div>
+      {{else}}
+        {{> followButton username=profile.username isFollowing=isFollowing isOwn=isOwn back=back loggedIn=currentUser large=true}}
+      {{/if}}
+    </div>
+    <ul class="list-inline profile-stats mb-0">
+      <li class="list-inline-item"><strong data-stat="posts">{{stats.posts}}</strong> {{plural stats.posts "публикация" "публикации" "публикаций"}}</li>
+      <li class="list-inline-item"><strong data-stat="followers">{{stats.followers}}</strong> {{plural stats.followers "подписчик" "подписчика" "подписчиков"}}</li>
+      <li class="list-inline-item"><strong data-stat="following">{{stats.following}}</strong> {{plural stats.following "подписка" "подписки" "подписок"}}</li>
+    </ul>
+    <p class="small text-body-secondary mt-2 mb-0">С нами с {{formatDate profile.createdAt}}</p>
+  </div>
+</section>
+
+{{#if posts.length}}
+  {{> photoGrid posts=posts}}
+  {{> pagination pagination=pagination}}
+{{else}}
+  <div class="empty-state text-center py-5">
+    <i class="bi bi-camera"></i>
+    <p class="mt-3 mb-1 fw-semibold">Публикаций пока нет</p>
+    {{#if isOwn}}<p class="text-body-secondary"><a href="/posts/new">Добавьте первую фотографию</a>.</p>{{/if}}
+  </div>
+{{/if}}
