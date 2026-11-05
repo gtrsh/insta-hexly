@@ -1,0 +1,226 @@
+:root {
+  --app-accent: #d6336c;
+  --app-accent-2: #f76707;
+  --bs-primary: #d6336c;
+  --bs-primary-rgb: 214, 51, 108;
+  --bs-link-color: #c2255c;
+  --bs-link-color-rgb: 194, 37, 92;
+  --bs-link-hover-color: #a61e4d;
+  --bs-link-hover-color-rgb: 166, 30, 77;
+}
+
+[data-bs-theme="dark"] {
+  --bs-link-color: #f06595;
+  --bs-link-color-rgb: 240, 101, 149;
+  --bs-link-hover-color: #faa2c1;
+  --bs-link-hover-color-rgb: 250, 162, 193;
+}
+
+body {
+  background: var(--bs-tertiary-bg);
+}
+
+.app-container {
+  max-width: 1040px;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--app-accent);
+  --bs-btn-border-color: var(--app-accent);
+  --bs-btn-hover-bg: #c2255c;
+  --bs-btn-hover-border-color: #c2255c;
+  --bs-btn-active-bg: #a61e4d;
+  --bs-btn-active-border-color: #a61e4d;
+  --bs-btn-disabled-bg: var(--app-accent);
+  --bs-btn-disabled-border-color: var(--app-accent);
+  --bs-btn-focus-shadow-rgb: 214, 51, 108;
+}
+
+.pagination {
+  --bs-pagination-active-bg: var(--app-accent);
+  --bs-pagination-active-border-color: var(--app-accent);
+  --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(214, 51, 108, 0.25);
+}
+
+.form-control:focus {
+  border-color: #f783ac;
+  box-shadow: 0 0 0 0.25rem rgba(214, 51, 108, 0.2);
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brand .bi {
+  background: linear-gradient(135deg, var(--app-accent-2), var(--app-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.avatar-placeholder {
+  background: hsl(var(--hue, 330) 65% 55%);
+  color: #fff;
+  user-select: none;
+}
+
+.avatar-sm { width: 28px; height: 28px; font-size: 0.8rem; }
+.avatar-md { width: 36px; height: 36px; font-size: 1rem; }
+.avatar-xl { width: 140px; height: 140px; font-size: 3.5rem; }
+
+@media (max-width: 575.98px) {
+  .avatar-xl { width: 96px; height: 96px; font-size: 2.5rem; }
+}
+
+.hero h1 {
+  letter-spacing: -0.03em;
+}
+
+.hero-grid {
+  transform: rotate(-2deg);
+}
+
+.hero-grid .photo-tile {
+  border-radius: 0.75rem;
+}
+
+.hero-placeholder {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, var(--app-accent-2), var(--app-accent));
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 5rem;
+}
+
+.feature {
+  background: var(--bs-body-bg);
+}
+
+.feature-icon {
+  font-size: 1.75rem;
+  color: var(--app-accent);
+}
+
+.feed {
+  max-width: 560px;
+}
+
+.post-card {
+  overflow: hidden;
+}
+
+.post-image-link {
+  display: block;
+  background: var(--bs-secondary-bg);
+}
+
+.post-image {
+  display: block;
+  width: 100%;
+  max-height: 720px;
+  object-fit: contain;
+}
+
+.caption {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.profile-stats .list-inline-item:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .photo-grid { gap: 12px; }
+}
+
+.photo-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bs-secondary-bg);
+}
+
+.photo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.photo-tile:hover img,
+.photo-tile:focus-visible img {
+  transform: scale(1.04);
+  filter: brightness(0.9);
+}
+
+.post-detail {
+  max-width: 960px;
+}
+
+.post-detail-media {
+  background: #000;
+  min-height: 320px;
+}
+
+.post-detail-media img {
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.auth-card {
+  max-width: 440px;
+}
+
+.form-card {
+  max-width: 620px;
+}
+
+.upload-preview {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: var(--bs-secondary-bg);
+  text-align: center;
+}
+
+.upload-preview img {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+.upload-preview-round {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+}
+
+.upload-preview-round img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+
+.empty-state .bi {
+  font-size: 3rem;
+  color: var(--bs-secondary-color);
+}
