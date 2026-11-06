@@ -1,7 +1,10 @@
 import { createLocalStorage } from './local.js';
+import { createS3Storage } from './s3.js';
 
 export function createStorage(config) {
-  return createLocalStorage(config.storage.local);
+  const { driver, local, s3 } = config.storage;
+  if (driver === 's3') return createS3Storage(s3);
+  return createLocalStorage(local);
 }
 
 export async function removeQuietly(storage, name, log) {

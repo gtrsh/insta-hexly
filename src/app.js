@@ -16,6 +16,7 @@ import { createStore } from './store.js';
 import { registerHelpers } from './lib/view-helpers.js';
 import { setupSession } from './plugins/session.js';
 import { createStorage } from './storage/index.js';
+import mediaRoutes from './routes/media.js';
 
 import homeRoutes from './routes/home.js';
 import authRoutes from './routes/auth.js';
@@ -48,7 +49,10 @@ export async function buildApp(overrides = {}, deps = {}) {
   app.decorate('store', createStore(db));
   app.decorate('storage', storage);
   app.log.info({ driver: storage.driver }, 'image storage ready');
-  app.addHook('onClose', async () => db.close());
+  app.addHook('onClose', async () => {
+    db.close();
+    if (!deps.storage) storage.client?.destroy();
+  });
 
   await app.register(fastifyCookie, { secret: config.cookieSecret });
   await app.register(fastifyFormbody, { bodyLimit: 64 * 1024 });
@@ -81,6 +85,8 @@ export async function buildApp(overrides = {}, deps = {}) {
       maxAge: '365d',
       immutable: true,
     });
+  } else if (storage.servesThroughApp) {
+    await app.register(mediaRoutes, { storage });
   }
 
   const handlebars = Handlebars.create();
