@@ -11,7 +11,8 @@
   "scripts": {
     "start": "NODE_ENV=production node --env-file-if-exists=.env src/server.js",
     "dev": "node --env-file-if-exists=.env --watch src/server.js",
-    "test": "node --test"
+    "test": "node --test",
+    "test:s3": "node --env-file=.env --test test/s3.live.test.js"
   },
   "keywords": [],
   "dependencies": {
